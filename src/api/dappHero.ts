@@ -18,13 +18,10 @@ const CONTRACTS_CONTRACT_ADDRESS = 'FgnK-IPuHLyQhGS_zQUCj22E0Tom-kFEun8zxaoRme4'
 
 const BUBBLE_ENDPOINT = false
 const isProduction = process.env.NODE_ENV === 'production'
-const BASE_URL = isProduction ? consts.global.BUBBLE_PROD_URL : consts.global.BUBBLE_DEV_URL
 const BACKEND_URL = isProduction ? consts.global.BACKEND_PROD_URL : consts.global.BACKEND_DEV_URL
 
 const POST = 'post'
 const GET = 'get'
-const PUT = 'put'
-const DELETE = 'delete'
 
 export const sendLogsToConsole = (json): void => {
   const { level, deviceId, isAnalytics, projectId, timestamp, message, ...restOfJson } = json
@@ -90,17 +87,7 @@ export const getContractsByProjectKeyDappHero = async (projectId) => {
 export const getContractsByProjectKeyBubble = async (projectId) => {
   logger.log(`projectId: ${projectId}`)
 
-  const body = { projectId }
   try {
-    // const axiosResponse = (await axios({
-    //   method: 'post',
-    //   url: BASE_URL,
-    //   data: body,
-    // }))
-    // const responseData = axiosResponse.data
-    // const { paused, data: contracts } = responseData.response
-    // const paymentAddress = responseData.response.paymentAddress || null
-    // const output = JSON.parse(contracts)
 
     const projects = await readContract(arweave, PROJECTS_CONTRACT_ADDRESS)
     const paused = projects.projects[projectId].isPaused
@@ -140,7 +127,6 @@ export const getContractsByProjectKey = async (projectId) => {
   // first try our cache server
   try {
     return (await getContractsByProjectKeyBubble(projectId))
-    return (await getContractsByProjectKeyDappHero(projectId))
   } catch (error) {
   // If the error fails, then try bubble
     logger.error('(DH-CORE) Error in Global Cache Network, re-trying...', error)
