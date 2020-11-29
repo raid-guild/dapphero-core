@@ -28,15 +28,15 @@ export const ProvidersWrapper: React.FC = () => {
 
   // load serBase
   const [ db, setDB ] = useState(null)
-  useEffect(() => {
+  // useEffect(() => {
 
-    const makeDBConnection = async () => {
-      setDB(await new DB({ appId: process.env.REACT_APP_USERBASE_APP_ID, projectId: consts.global.apiKey }))
-    }
-    if (consts.global.apiKey) {
-      makeDBConnection()
-    }
-  }, [])
+  //   const makeDBConnection = async () => {
+  //     setDB(await new DB({ appId: process.env.REACT_APP_USERBASE_APP_ID, projectId: consts.global.apiKey }))
+  //   }
+  //   if (consts.global.apiKey) {
+  //     makeDBConnection()
+  //   }
+  // }, [])
 
   // load contracts effects only if not paused
   useEffect(() => {

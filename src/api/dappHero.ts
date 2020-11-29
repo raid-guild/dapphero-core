@@ -1,8 +1,20 @@
+import Arweave from 'arweave'
 import Axios from 'axios'
+import { readContract } from 'smartweave'
 import { logger } from 'logger/customLogger'
 import * as consts from 'consts'
 
 const axios = Axios.create({ headers: { 'content-type': 'application/json' } })
+const arweave = Arweave.init({
+  host: 'arweave.net',// Hostname or IP address for a Arweave host
+  port: 443,          // Port
+  protocol: 'https',  // Network protocol http or https
+  timeout: 20000,     // Network request timeouts in milliseconds
+  logging: false,     // Enable network request logging
+})
+
+const PROJECTS_CONTRACT_ADDRESS = 'QYKnm-uZY9Ib6r-jwD4HXmkmyjtjWrjBiVTPgx6X1n0'
+const CONTRACTS_CONTRACT_ADDRESS = 'FgnK-IPuHLyQhGS_zQUCj22E0Tom-kFEun8zxaoRme4'
 
 const BUBBLE_ENDPOINT = false
 const isProduction = process.env.NODE_ENV === 'production'
@@ -80,22 +92,34 @@ export const getContractsByProjectKeyBubble = async (projectId) => {
 
   const body = { projectId }
   try {
-    const axiosResponse = (await axios({
-      method: 'post',
-      url: BASE_URL,
-      data: body,
-    }))
-    const responseData = axiosResponse.data
-    const { paused, data: contracts } = responseData.response
-    const paymentAddress = responseData.response.paymentAddress || null
-    const output = JSON.parse(contracts)
-    const formattedOutput = output.map((contract) => {
-      const { contractABI, networkid, projectid, ...rest } = contract
+    // const axiosResponse = (await axios({
+    //   method: 'post',
+    //   url: BASE_URL,
+    //   data: body,
+    // }))
+    // const responseData = axiosResponse.data
+    // const { paused, data: contracts } = responseData.response
+    // const paymentAddress = responseData.response.paymentAddress || null
+    // const output = JSON.parse(contracts)
+
+    const projects = await readContract(arweave, PROJECTS_CONTRACT_ADDRESS)
+    const paused = projects.projects[projectId].isPaused
+    const contractIds = projects.projects[projectId].contracts
+    const contracts = await readContract(arweave, CONTRACTS_CONTRACT_ADDRESS)
+    let contractsArray = []
+    for (let i=0; i < contractIds.length; i++) {
+      contractsArray.push(contracts.contracts[contractIds[i]])
+    }
+
+    const formattedOutput = contractsArray.map((contract) => {
+      const { abi, name, deployedAddress, ...rest } = contract
       return {
         ...rest,
-        contractAbi: JSON.parse(contractABI),
-        networkId: networkid,
-        projectId: projectid,
+        contractAddress: deployedAddress,
+        contractName: name,
+        contractAbi: JSON.parse(abi),
+        networkId: 4,
+        projectId: projectId,
       }
     })
 
@@ -104,7 +128,7 @@ export const getContractsByProjectKeyBubble = async (projectId) => {
     // } catch (err) {
     //   // handle error
     // }
-    return { formattedOutput, paused, paymentAddress }
+    return { formattedOutput, paused }
   } catch (err) {
     logger.error('Error in dappHero api, getContractsByProjectKey', err)
     throw new Error(err)
