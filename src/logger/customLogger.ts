@@ -2,7 +2,6 @@
 import * as consts from 'consts'
 import cuid from 'cuid'
 import * as config from 'config'
-import { postLogToBubbleBackend, postLogToDappHeroBackend } from 'api/dappHero'
 
 export const sendLogsToConsole = (json: any): void => {
   try {
@@ -65,10 +64,10 @@ export class DappHeroLogger {
     sendLogsToConsole(json)
 
     // Send logs to bubble backend for analytics
-    if (this.isAnalytics) postLogToBubbleBackend(json)
+    // if (this.isAnalytics) postLogToBubbleBackend(json)
 
     // Log to dapphero backend
-    postLogToDappHeroBackend(json)
+    // postLogToDappHeroBackend(json)
   }
 
   private formatPayload = (level, message, json): { [key: string]: any } => {
