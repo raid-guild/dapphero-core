@@ -18,7 +18,7 @@ import { callMethod } from './callMethod'
 
 import { notify, getParametersFromInputValues, findReplaceOverloadedMethods } from './utils/utils'
 
-const blockNativeApiKey = process.env.REACT_APP_BLOCKNATIVE_API
+const blockNativeApiKey = '2e9abb5e-d307-4746-896b-e5e81bb20c9c'
 
 export type ReducerProps = {
   info: any;
