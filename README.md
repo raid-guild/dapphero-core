@@ -2,7 +2,7 @@
 
 _dependencies last pinned 1/8/20_
 
-Latest arweave port build is deployed at: https://arweave.net/aRnzGy1O31tnJbjBKk6zoe7u5FpnTxFL0Q5Fs-HuB8Q
+Latest arweave port build is deployed at: https://arweave.net/A0BT56KVqrcPU11lSs8H5F_jGnA--q5mztmtoOX-x8c
 
 ## Future Improvements
 

@@ -13,6 +13,7 @@ export const ethNetworkName = {
 }
 const apiKeyElement = document.getElementById('dh-apiKey')
 export const apiKey = apiKeyElement.getAttribute('data-api')
+export const readProvider = apiKeyElement.getAttribute('data-provider')
 export const AUTO_INVOKE_INTERVAL = 3000
 
 export const AUTO_INVOKE_DYNAMIC = {

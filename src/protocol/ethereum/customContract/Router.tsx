@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import * as contexts from 'contexts'
 import * as consts from 'consts'
 import { ethers, logger } from 'ethers'
-import { useWeb3Provider } from 'hooks'
+// import { useWeb3Provider } from 'hooks'
 import { useToasts } from 'react-toast-notifications'
 
 import { EmitterContext } from 'providers/EmitterProvider/context'
@@ -41,7 +41,7 @@ export const Router: React.FunctionComponent<RouterProps> = ({ listOfContractMet
   // Get the Network for our Project
   const contractNetwork = consts.global.ethNetworkName[networkId].toLowerCase()
 
-  const stableReadProvider = new ethers.providers.JsonRpcProvider(consts.providerSchema.readProviders[contractNetwork].http)
+  const stableReadProvider = new ethers.providers.JsonRpcProvider(consts.global.readProvider)
 
   // TODO: [DEV-340] Mainnet will always load backend provider because ethers calls it "homestead"
   const [ readContract, setReadContract ] = useState(null)

@@ -9,34 +9,34 @@ export const providerSchema = {
   address: null,
 }
 
-export const readProviders = {
-  mainnet: {
-    http: 'https://eth-mainnet.alchemyapi.io/v2/CnbMV4_Qz6cOngXIVJDRLU34yIfp2xIb',
-    ws: 'wss://eth-mainnet.ws.alchemyapi.io/v2/CnbMV4_Qz6cOngXIVJDRLU34yIfp2xIb',
-  },
-  rinkeby: {
-    http: 'https://eth-rinkeby.alchemyapi.io/v2/vWgMeBNcpq5cgTxG2wg0AjBEub_Fv0gF',
-    ws: 'wss://eth-rinkeby.ws.alchemyapi.io/v2/vWgMeBNcpq5cgTxG2wg0AjBEub_Fv0gF',
-  },
-  ropsten: {
-    http: 'https://eth-ropsten.alchemyapi.io/v2/1RTNsM-Cj1h8baw8mPm1K5ML-IEXRGHu',
-    ws: 'wss://eth-ropsten.ws.alchemyapi.io/v2/1RTNsM-Cj1h8baw8mPm1K5ML-IEXRGHu',
-  },
-  kovan: {
-    http: 'https://eth-kovan.alchemyapi.io/v2/CLg7Mum7R5A-URTticJ_0imkMZzEbT1E',
-    ws: 'wss://eth-kovan.ws.alchemyapi.io/v2/CLg7Mum7R5A-URTticJ_0imkMZzEbT1E',
-  },
-  goerli: {
-    http: 'https://eth-goerli.alchemyapi.io/v2/mo2KeoBlZY6CAyc2o1i4BcBNioVN_wpJ',
-    ws: 'wss://eth-goerli.ws.alchemyapi.io/v2/mo2KeoBlZY6CAyc2o1i4BcBNioVN_wpJ',
-  },
-  xdai: {
-    http: 'https://dai.poa.network',
-    ws: 'wss://dai-trace-ws.blockscout.com/ws',
-  },
-  maticmumbaitestnet: {
-    http: 'https://rpc-mumbai.matic.today',
-    ws: '',
-  },
+// export const readProviders = {
+//   mainnet: {
+//     http: 'https://mainnet.infura.io/v3/d108c2431380445bbb4010faa5f6be4e',
+//     ws: 'wss://mainnet.infura.io/ws/v3/d108c2431380445bbb4010faa5f6be4e',
+//   },
+//   rinkeby: {
+//     http: 'https://rinkeby.infura.io/v3/d108c2431380445bbb4010faa5f6be4e',
+//     ws: 'wss://rinkeby.infura.io/ws/v3/d108c2431380445bbb4010faa5f6be4e',
+//   },
+//   ropsten: {
+//     http: 'https://robsten.infura.io/v3/d108c2431380445bbb4010faa5f6be4e',
+//     ws: 'wss://robsten.infura.io/ws/v3/d108c2431380445bbb4010faa5f6be4e',
+//   },
+//   kovan: {
+//     http: 'https://kovan.infura.io/v3/d108c2431380445bbb4010faa5f6be4e',
+//     ws: 'wss://kovan.infura.io/ws/v3/d108c2431380445bbb4010faa5f6be4e',
+//   },
+//   goerli: {
+//     http: 'https://goerli.infura.io/v3/d108c2431380445bbb4010faa5f6be4e',
+//     ws: 'wss://goerli.infura.io/ws/v3/d108c2431380445bbb4010faa5f6be4e',
+//   },
+//   xdai: {
+//     http: 'https://dai.poa.network',
+//     ws: 'wss://dai-trace-ws.blockscout.com/ws',
+//   },
+//   maticmumbaitestnet: {
+//     http: 'https://rpc-mumbai.matic.today',
+//     ws: '',
+//   },
 
-}
+// }
