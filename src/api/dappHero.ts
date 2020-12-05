@@ -12,8 +12,8 @@ const arweave = Arweave.init({
   logging: false,     // Enable network request logging
 })
 
-const PROJECTS_CONTRACT_ADDRESS = '7UkUpwjSn8dWMUYU-XRfeHq68uzH8lbBYjEp5BYnOXY'
-const CONTRACTS_CONTRACT_ADDRESS = 'vgRwEGqrDsImkGXG9GNxBwCYR6-AVTKiet1kw-M_GdY'
+const PROJECTS_CONTRACT_ADDRESS = 'Gx8E31NsUjkte9RMMdYXNynHXft_vo8c_G39OlIkyiQ'
+const CONTRACTS_CONTRACT_ADDRESS = 'jYn1iueQHZBo-1EJnK6wfiJzl6nSnIdvjQthxPdlnK4'
 
 export const sendLogsToConsole = (json): void => {
   const { level, deviceId, isAnalytics, projectId, timestamp, message, ...restOfJson } = json
