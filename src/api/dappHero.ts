@@ -12,8 +12,8 @@ const arweave = Arweave.init({
   logging: false,     // Enable network request logging
 })
 
-const PROJECTS_CONTRACT_ADDRESS = 'Gx8E31NsUjkte9RMMdYXNynHXft_vo8c_G39OlIkyiQ'
-const CONTRACTS_CONTRACT_ADDRESS = 'jYn1iueQHZBo-1EJnK6wfiJzl6nSnIdvjQthxPdlnK4'
+const PROJECTS_CONTRACT_ADDRESS = 'Y1Ik4EPSOpavP24nJzRLO4TeJRbSvarfRVvXxBOqEOI'
+const CONTRACTS_CONTRACT_ADDRESS = 'kJiz2yvXjHDGUT45XudbRcC9uy6QJce2JgwDXlJlv0Y'
 
 export const sendLogsToConsole = (json): void => {
   const { level, deviceId, isAnalytics, projectId, timestamp, message, ...restOfJson } = json
@@ -24,7 +24,7 @@ export const sendLogsToConsole = (json): void => {
 export const getContractsByProjectKeyBubble = async (projectId) => {
   logger.log(`projectId: ${projectId}`)
 
-  try {
+  // try {
 
     const projects = await readContract(arweave, PROJECTS_CONTRACT_ADDRESS)
     const paused = projects.projects[projectId].isPaused
@@ -35,8 +35,9 @@ export const getContractsByProjectKeyBubble = async (projectId) => {
       contractsArray.push(contracts.contracts[contractIds[i]])
     }
 
-    const formattedOutput = contractsArray.map((contract) => {
+    const formattedOutput = await Promise.all(contractsArray.map(async (contract) => {
       const { abi, name, network, deployedAddress, ...rest } = contract
+      const abiText = await arweave.transactions.getData(abi, { decode: true, string: true }) as string;
 
       let networkId = 4
       switch(network) {
@@ -69,17 +70,17 @@ export const getContractsByProjectKeyBubble = async (projectId) => {
         ...rest,
         contractAddress: deployedAddress,
         contractName: name,
-        contractAbi: JSON.parse(abi),
+        contractAbi: JSON.parse(abiText),
         networkId: networkId,
         projectId: projectId,
       }
-    })
+    }))
 
     return { formattedOutput, paused }
-  } catch (err) {
-    logger.error('Error in dappHero api, getContractsByProjectKey', err)
-    throw new Error(err)
-  }
+  // } catch (err) {
+  //   logger.error('Error in dappHero api, getContractsByProjectKey', err)
+  //   throw new Error(err)
+  // }
 }
 
 export const getContractsByProjectKey = async (projectId) => {
