@@ -41,7 +41,7 @@ export const ProvidersWrapper: React.FC = () => {
   // load contracts effects only if not paused
   useEffect(() => {
     const getConfig = async () => {
-      const res = await api.dappHero.getContractsByProjectKey(consts.global.apiKey)
+      const res = await api.dappHero.getContractsByProjectKey(consts.global.apiKey);
       const { formattedOutput, paused } = res
       const newConfig = { contracts: formattedOutput }
       // eslint-disable-next-line no-unused-expressions

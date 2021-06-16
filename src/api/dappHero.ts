@@ -12,7 +12,7 @@ const arweave = Arweave.init({
   logging: false,     // Enable network request logging
 })
 
-const PROJECTS_CONTRACT_ADDRESS = 'Y1Ik4EPSOpavP24nJzRLO4TeJRbSvarfRVvXxBOqEOI'
+const PROJECTS_CONTRACT_ADDRESS = '0Nx9CWDplg9guCp67_NlT2axv-GLyxQaZaI1TyDMSzg'
 const CONTRACTS_CONTRACT_ADDRESS = 'kJiz2yvXjHDGUT45XudbRcC9uy6QJce2JgwDXlJlv0Y'
 
 export const sendLogsToConsole = (json): void => {
@@ -24,8 +24,7 @@ export const sendLogsToConsole = (json): void => {
 export const getContractsByProjectKeyBubble = async (projectId) => {
   logger.log(`projectId: ${projectId}`)
 
-  // try {
-
+  try {
     const projects = await readContract(arweave, PROJECTS_CONTRACT_ADDRESS)
     const paused = projects.projects[projectId].isPaused
     const contractIds = projects.projects[projectId].contracts
@@ -36,7 +35,7 @@ export const getContractsByProjectKeyBubble = async (projectId) => {
     }
 
     const formattedOutput = await Promise.all(contractsArray.map(async (contract) => {
-      const { abi, name, network, deployedAddress, ...rest } = contract
+      const { abi, name, network, deployedAddress, ...rest } = await contract
       const abiText = await arweave.transactions.getData(abi, { decode: true, string: true }) as string;
 
       let networkId = 4
@@ -77,10 +76,10 @@ export const getContractsByProjectKeyBubble = async (projectId) => {
     }))
 
     return { formattedOutput, paused }
-  // } catch (err) {
-  //   logger.error('Error in dappHero api, getContractsByProjectKey', err)
-  //   throw new Error(err)
-  // }
+  } catch (err) {
+    logger.error('Error in dappHero api, getContractsByProjectKey', err)
+    throw new Error(err)
+  }
 }
 
 export const getContractsByProjectKey = async (projectId) => {
